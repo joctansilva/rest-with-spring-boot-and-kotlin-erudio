@@ -20,6 +20,42 @@ class MathController {
         return convertToDouble(numberOne) + convertToDouble(numberTwo)
     }
 
+    @RequestMapping(value = ["/division/{numberOne}/{numberTwo}"])
+    fun division(@PathVariable(value="numberOne") numberOne: String?,
+            @PathVariable(value="numberTwo") numberTwo: String?
+    ): Double {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Please set a numeric value!")
+        return convertToDouble(numberOne) / convertToDouble(numberTwo)
+    }
+
+    @RequestMapping(value = ["/multiplication/{numberOne}/{numberTwo}"])
+    fun multiplication(@PathVariable(value="numberOne") numberOne: String?,
+            @PathVariable(value="numberTwo") numberTwo: String?
+    ): Double {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Please set a numeric value!")
+        return convertToDouble(numberOne) * convertToDouble(numberTwo)
+    }
+
+    @RequestMapping(value = ["/media/{numberOne}/{numberTwo}"])
+    fun media(@PathVariable(value="numberOne") numberOne: String?,
+            @PathVariable(value="numberTwo") numberTwo: String?
+    ): Double {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Please set a numeric value!")
+        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2
+    }
+
+    @RequestMapping(value = ["/pot/{numberOne}/{numberTwo}"])
+    fun pot(@PathVariable(value="numberOne") numberOne: String?,
+            @PathVariable(value="numberTwo") numberTwo: String?
+    ): Double {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Please set a numeric value!")
+        return Math.pow(convertToDouble(numberOne), convertToDouble(numberTwo))
+    }
+
     private fun convertToDouble(strNumber: String?): Double {
         if (strNumber.isNullOrBlank()) return 0.0
         // BR 10,20 US 10.20
