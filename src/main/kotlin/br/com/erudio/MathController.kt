@@ -38,8 +38,8 @@ class MathController {
         return convertToDouble(numberOne) * convertToDouble(numberTwo)
     }
 
-    @RequestMapping(value = ["/media/{numberOne}/{numberTwo}"])
-    fun media(@PathVariable(value="numberOne") numberOne: String?,
+    @RequestMapping(value = ["/mean/{numberOne}/{numberTwo}"])
+    fun mean(@PathVariable(value="numberOne") numberOne: String?,
             @PathVariable(value="numberTwo") numberTwo: String?
     ): Double {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo))
@@ -54,6 +54,14 @@ class MathController {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Please set a numeric value!")
         return Math.pow(convertToDouble(numberOne), convertToDouble(numberTwo))
+    }
+
+    @RequestMapping(value = ["/squareRoot/{numberOne}/{numberTwo}"])
+    fun squareRoot(@PathVariable(value="number") number: String?
+    ): Double {
+        if (!isNumeric(number))
+            throw UnsupportedMathOperationException("Please set a numeric value!")
+        return Math.sqrt(convertToDouble(number))
     }
 
     private fun convertToDouble(strNumber: String?): Double {
